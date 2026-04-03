@@ -2,14 +2,9 @@ import os
 from dotenv import load_dotenv
 from huggingface_hub import InferenceClient
 
-
-
 load_dotenv()
 
 token = os.getenv("HF_TOKEN")
-
-print("Token loaded:", bool(token))
-
 if not token:
     raise ValueError("HF_TOKEN not found in .env")
 
@@ -19,11 +14,11 @@ client = InferenceClient(
 )
 
 response = client.chat_completion(
-    model="Jackrong/Qwen3.5-9B-Claude-4.6-Opus-Reasoning-Distilled-GGUF",
+    model="Qwen/Qwen2.5-7B-Instruct-1M",
     messages=[
-        {"role": "user", "content": "Write a short cheerful message for someone getting back into coding."}
+        {"role": "user", "content": "Say hello in one cheerful sentence."}
     ],
-    max_tokens=80,
+    max_tokens=40,
 )
 
 print(response.choices[0].message.content)
